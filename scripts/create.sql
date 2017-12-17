@@ -1,0 +1,43 @@
+CREATE DATABASE nome_do_banco
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
+
+USE nome_do_banco;
+
+SET NAMES utf8;
+
+CREATE TABLE nome_da_tabela(
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(35) NOT NULL,
+email VARCHAR(35) NOT NULL,
+senha VARCHAR(32) NOT NULL
+)ENGINE = InnoDB
+DEFAULT CHARSET = utf8;
+
+CREATE TABLE tabela1(
+id INT AUTO_INCREMENT,
+descricao TEXT,
+CONSTRAINT tabela1_id_pk PRIMARY KEY(id)
+)ENGINE = InnoDB
+DEFAULT CHARSET = utf8;
+
+CREATE TABLE tabela2(
+id INT AUTO_INCREMENT,
+tb1_fk INT,
+at1 VARCHAR(35),
+at2 INT,
+at3 DATE,
+at4 DECIMAL(5,2),
+CONSTRAINT tabela2_id_pk PRIMARY KEY(id),
+CONSTRAINT tabela2_tb1_fk FOREIGN KEY(tb1_fk) REFERENCES tabela1(id)
+)ENGINE = InnoDB
+DEFAULT CHARSET = utf8;
+
+INSERT INTO tabela2 (at1, at2, at3, at4) VALUES ('texto de 35 caracteres...', 20, '2017-12-11', 327.75);
+
+SELECT tb.at1 FROM tabela2 AS tb;
+
+CREATE VIEW tbinfo AS SELECT * FROM tabela2;
+
+SELECT * FROM tbinfo;
+
